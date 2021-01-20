@@ -62,4 +62,4 @@ def get_secret(secret_name):
 
 
 def get_from_env_or_ssm(secret_name):
-    return os.environ.get('SATOSHI') or get_secret(secret_name)
+    return os.environ.get('SATOSHI') or get_secret(secret_name) or 'FAILED'
