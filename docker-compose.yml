@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  beanstalk-flask:
+  flask-on-docker:
     image: "imoisejevs/flask-on-docker"
     ports:
       - "80:5000"
