@@ -10,7 +10,7 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # actually run the app
-# EXPOSE 5000
+EXPOSE 5000
 # option 1
 CMD python app.py
 
