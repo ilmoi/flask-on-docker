@@ -16,7 +16,7 @@ app = create_app()
 
 @app.route('/')
 def hello():
-    return 'Version 12'
+    return 'Version 13'
 
 
 @app.route('/env')

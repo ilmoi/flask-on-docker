@@ -1,0 +1,12 @@
+#this is the DEV version
+
+version: '3.8'
+services:
+  flask-on-docker:
+    image: "local-flask-on-docker"
+    build: "."
+    ports:
+      - "80:5000"
+    environment:
+      - USER=ilja
+      - PASSWD=lol
