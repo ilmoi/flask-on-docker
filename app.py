@@ -1,3 +1,5 @@
+import os
+
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 
@@ -14,7 +16,12 @@ app = create_app()
 
 @app.route('/')
 def hello():
-    return 'Version 11'
+    return 'Version 12'
+
+
+@app.route('/env')
+def env():
+    return f"{os.environ.get('USER')}, {os.environ.get('PASSWD')}"
 
 
 @app.route('/secret')
