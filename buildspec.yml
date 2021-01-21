@@ -6,13 +6,8 @@ phases:
       - echo prepping secrets
       - mkdir secret
 #      - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > secret/env.json
-      - declare -a secrets=("prod/db_url" "SATOSHI" "prod/simplez_keyz")
-      - for i in "${secrets[@]}"
-      - do
-      - echo "Handling secret $i"
-      - aws secretsmanager get-secret-value --secret-id $i --version-stage AWSCURRENT | jq -r '.SecretString' | jq -s add - secret/env.json > secret/temp_env.json
-      - cp secret/temp_env.json secret/env.json
-      - done
+      - chmod +x get_secrets.sh
+      - ./get_secrets.sh
       - ls -la secret
       - echo Logging in to Amazon ECR...
       - aws --version
