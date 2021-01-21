@@ -44,7 +44,10 @@ phases:
   build:
     commands:
        - echo build stage is running!!!!!!!!!!!!!
+       - pwd
+       - ls -la
        - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > env.json
+       - ls -la
       # - command
   #post_build:
     #commands:
