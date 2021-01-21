@@ -4,5 +4,7 @@ version: '3.8'
 services:
   flask-on-docker:
     image: "243750091829.dkr.ecr.us-east-2.amazonaws.com/flask-on-docker"
+    volumes:
+      - /secret:/secret
     ports:
       - "80:5000"

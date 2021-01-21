@@ -7,7 +7,7 @@ import os
 
 def get_secret_from_file():
     try:
-        with open('env.json') as f:
+        with open('/secret/env.json') as f:
             txt = json.load(f)
             return txt
     except:

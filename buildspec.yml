@@ -3,6 +3,11 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo prepping secrets
+      - mkdir secret
+      - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > secret/env.json
+      - ls -la
+      - ls -la /secret
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 243750091829.dkr.ecr.us-east-2.amazonaws.com
@@ -19,7 +24,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:latest
+#      - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
 #      - printf '[{"name":"flask-on-docker","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
