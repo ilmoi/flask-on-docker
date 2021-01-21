@@ -49,12 +49,12 @@ phases:
        - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > env.json
        - ls -la
       # - command
-  post_build:
-    commands:
-       - mkdir deploy
-       - mkdir deploy/dir1
-       - touch deploy/dir1/test.txt
-       - mv app.py deploy/app.py
+#  post_build:
+#    commands:
+#       - mkdir deploy
+#       - mkdir deploy/dir1
+#       - touch deploy/dir1/test.txt
+#       - mv app.py deploy/app.py
       # - command
 #reports:
   #report-name-or-arn:
@@ -66,7 +66,8 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-    - deploy/**/*
+    - '**/*'
+#    - deploy/**/*
     # - location
     # - location
   #name: $(date +%Y-%m-%d)

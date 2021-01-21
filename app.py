@@ -14,7 +14,7 @@ app = create_app()
 
 @app.route('/')
 def hello():
-    return 'Version 9'
+    return 'Version 11'
 
 
 @app.route('/secret')
