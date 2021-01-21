@@ -14,6 +14,11 @@ app = create_app()
 
 @app.route('/')
 def hello():
+    return 'Version 7'
+
+
+@app.route('/secret')
+def test_secret():
     load_dotenv()
     secret = retrieve_secret("SATOSHI")
     return jsonify(secret)
