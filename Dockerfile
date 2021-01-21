@@ -9,6 +9,9 @@ COPY . .
 # install dependencies
 RUN pip install -r requirements.txt
 
+RUN pwd
+RUN ls -la
+
 # actually run the app
 EXPOSE 5000
 # option 1
