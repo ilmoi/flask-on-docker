@@ -5,7 +5,7 @@ phases:
     commands:
       - echo prepping secrets
       - mkdir secret
-      - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > secret/env.json
+#      - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > secret/env.json
       - ls -la
       - ls -la secret
       - echo Logging in to Amazon ECR...
