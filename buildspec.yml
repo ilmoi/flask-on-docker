@@ -1,26 +1,70 @@
 version: 0.2
 
+#phases:
+#  pre_build:
+#    commands:
+#      - echo Logging in to Amazon ECR...
+#      - aws --version
+#      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 243750091829.dkr.ecr.us-east-2.amazonaws.com
+#      - REPOSITORY_URI=243750091829.dkr.ecr.us-east-2.amazonaws.com/flask-text-app
+#      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+#      - IMAGE_TAG=${COMMIT_HASH:=latest}
+#  build:
+#    commands:
+#      - echo Build started on `date`
+#      - echo Building the Docker image...
+#      - docker build -t $REPOSITORY_URI:latest .
+#      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+#  post_build:
+#    commands:
+#      - echo Build completed on `date`
+#      - echo Pushing the Docker images...
+#      - docker push $REPOSITORY_URI:latest
+#      - docker push $REPOSITORY_URI:$IMAGE_TAG
+#      - printf '[{"name":"flask-text","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+#artifacts:
+# files: imagedefinitions.json
+
+
+
 phases:
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - aws --version
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 243750091829.dkr.ecr.us-east-2.amazonaws.com
-      - REPOSITORY_URI=243750091829.dkr.ecr.us-east-2.amazonaws.com/flask-text-app
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+  #install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    #runtime-versions:
+      # name: version
+      # name: version
+    #commands:
+      # - command
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - printf '[{"name":"flask-text","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+       - echo build stage is running!!!!!!!!!!!!!
+       - aws secretsmanager get-secret-value --secret-id SATOSHI --version-stage AWSCURRENT | jq -r '.SecretString' > env.json
+      # - command
+  #post_build:
+    #commands:
+      # - command
+      # - command
+#reports:
+  #report-name-or-arn:
+    #files:
+      # - location
+      # - location
+    #base-directory: location
+    #discard-paths: yes
+    #file-format: JunitXml | CucumberJson
 artifacts:
- files: imagedefinitions.json
+  files: .
+    # - location
+    # - location
+  #name: $(date +%Y-%m-%d)
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths

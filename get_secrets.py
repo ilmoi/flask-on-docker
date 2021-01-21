@@ -9,27 +9,36 @@ import base64
 from botocore.exceptions import ClientError
 
 
-def get_secret(secret_name):
-    print('im called!!!')
-    region_name = "us-east-2"
+# def get_secret(secret_name):
+#     print('im called!!!')
+#     region_name = "us-east-2"
+#
+#     session = boto3.session.Session()
+#     client = session.client(
+#         service_name='secretsmanager',
+#         region_name=region_name
+#     )
+#
+#     get_secret_value_response = client.get_secret_value(
+#         SecretId=secret_name
+#     )
+#
+#     if 'SecretString' in get_secret_value_response:
+#         secret = get_secret_value_response['SecretString']
+#     else:
+#         decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
+#
+#     return json.loads(secret) or decoded_binary_secret
 
-    session = boto3.session.Session()
-    client = session.client(
-        service_name='secretsmanager',
-        region_name=region_name
-    )
 
-    get_secret_value_response = client.get_secret_value(
-        SecretId=secret_name
-    )
-
-    if 'SecretString' in get_secret_value_response:
-        secret = get_secret_value_response['SecretString']
-    else:
-        decoded_binary_secret = base64.b64decode(get_secret_value_response['SecretBinary'])
-
-    return json.loads(secret) or decoded_binary_secret
+def get_secret_from_file():
+    try:
+        with open ('env.json') as f:
+            txt = json.load(f)
+            return txt
+    except:
+        return
 
 
 def get_from_env_or_ssm(secret_name):
-    return os.environ.get('SATOSHI') or get_secret(secret_name) or 'FAILED'
+    return os.environ.get('SATOSHI') or get_secret_from_file() or 'FAILED'
