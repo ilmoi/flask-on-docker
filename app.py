@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 
-from get_secrets import get_from_env_or_ssm
+from get_secrets import retrieve_secret
 
 
 def create_app():
@@ -15,7 +15,7 @@ app = create_app()
 @app.route('/')
 def hello():
     load_dotenv()
-    secret = get_from_env_or_ssm("SATOSHI")
+    secret = retrieve_secret("SATOSHI")
     return jsonify(secret)
 
 

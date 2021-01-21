@@ -40,6 +40,6 @@ def get_secret_from_file():
         return
 
 
-def get_from_env_or_ssm(secret_name):
+def retrieve_secret(secret_name):
     print('================ RUNNING VERSION: V2')
     return os.environ.get('SATOSHI') or get_secret_from_file() or 'FAILED'
